@@ -1,7 +1,5 @@
 package com.github.rshtishi.bankwsclient.client;
 
-import java.util.List;
-
 import javax.xml.bind.JAXBElement;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +12,16 @@ import com.github.rshtishi.bankws.soap.client.bankws.GetTrasactionsForClient;
 import com.github.rshtishi.bankws.soap.client.bankws.GetTrasactionsForClientResponse;
 import com.github.rshtishi.bankws.soap.client.bankws.GetTrasactionsResponse;
 import com.github.rshtishi.bankws.soap.client.bankws.ObjectFactory;
-import com.github.rshtishi.bankws.soap.client.bankws.Transaction;
+import com.github.rshtishi.bankwsclient.config.SoapProperties;
 
 @Service
 public class BankWSClient {
 
 	@Autowired
 	private Jaxb2Marshaller marshaller;
+	
+	@Autowired
+	private SoapProperties soapProperties;
 
 	private WebServiceTemplate template;
 
@@ -30,7 +31,7 @@ public class BankWSClient {
 		GetTrasactions getTransactions = factory.createGetTrasactions();
 		JAXBElement<GetTrasactions> request = factory.createGetTrasactions(getTransactions);
 		JAXBElement<GetTrasactionsResponse> response = (JAXBElement<GetTrasactionsResponse>) template
-				.marshalSendAndReceive("http://localhost:8888/baws", request);
+				.marshalSendAndReceive(soapProperties.getEndpoint().getUrl(), request);
 		return response;
 	}
 
@@ -41,7 +42,7 @@ public class BankWSClient {
 		getTransactionsForClient.setArg0(client);
 		JAXBElement<GetTrasactionsForClient> request = factory.createGetTrasactionsForClient(getTransactionsForClient);
 		JAXBElement<GetTrasactionsForClientResponse> response = (JAXBElement<GetTrasactionsForClientResponse>) template
-				.marshalSendAndReceive("http://localhost:8888/baws", request);
+				.marshalSendAndReceive(soapProperties.getEndpoint().getUrl(), request);
 		return response;
 
 	}

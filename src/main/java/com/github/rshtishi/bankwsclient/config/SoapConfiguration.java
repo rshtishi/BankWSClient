@@ -13,5 +13,10 @@ public class SoapConfiguration {
 		marshaller.setPackagesToScan("com.github.rshtishi.bankws.soap.client.bankws");
 		return marshaller;
 	}
+	
+	@Bean
+	public SoapProperties soapProperties() {
+		return new SoapProperties();
+	}
 
 }
