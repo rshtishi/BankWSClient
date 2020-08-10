@@ -1,7 +1,7 @@
 # BankWSClient
 
-*BankWSClient* is spring-boot application written in java language that consumes a soap web services, computes the data retrieved 
-from soap calls and exposes the result via rest services.
+*BankWSClient* is a spring-boot application written in java language that consumes soap web services, computes the data retrieved 
+from soap calls, exposes the result via rest services.
 
 ## Business case
 
